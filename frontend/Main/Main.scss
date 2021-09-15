@@ -1,0 +1,29 @@
+html{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+*{
+    margin:0;
+    padding: 0;
+}
+@font-face{
+    font-family: Montserrat-light;
+    src: url('../../media/Montserrat/Montserrat-Light.ttf');
+    font-weight:300;
+}
+.MainContainer{
+    font-family: Montserrat-light;
+    & .Form__text__change{
+        transition: 0.15s transform;
+        user-select: none;
+        background: #000;
+        display: inline-block;
+        color:#fff;
+        &:hover{
+            cursor: pointer;
+            
+        }
+        &:active{
+            transform: translateY(10px);
+        }
+    }
+}   
