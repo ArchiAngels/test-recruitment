@@ -1,0 +1,19 @@
+.CustomSend_container{
+    & .CustomSend_input{
+        width:75px;
+        box-sizing: border-box;
+        padding: 10px;
+        border:1px solid transparent;
+        outline: none;
+        transition: 0.15s transform;
+        &:hover{
+            cursor: pointer;
+        }
+        &:active{
+            transform: translateY(5px);
+        }
+        &:focus{
+            border:1px solid #000;
+        }
+    }
+}

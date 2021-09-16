@@ -7,10 +7,10 @@ html{
 }
 @font-face{
     font-family: Montserrat-light;
-    src: url('../../media/Montserrat/Montserrat-Light.ttf');
+    src: url('../../../media/Montserrat/Montserrat-Light.ttf');
     font-weight:300;
 }
-.MainContainer{
+.notLoggedContainer{
     font-family: Montserrat-light;
     width:100vw;
     height:100vh;
@@ -18,7 +18,17 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
+    & .notLoggedContent{
+        min-width:220px;
+        min-height: 250px;
+        padding: 25px;
+        box-sizing: border-box;
+        border:1px solid gray; 
+    }
     & .Form__text__change{
+        position:absolute;
+        top:0;
+        left:0;
         transition: 0.15s transform;
         user-select: none;
         background: #000;
