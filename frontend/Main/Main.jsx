@@ -16,10 +16,13 @@ function Main(){
    }
     return <>
         <div className="MainContainer">
-            {form ? <Register/> : <Login/>}
-            <p onClick={ChangeForm} className='Form__text__change'>
-                {form ? 'Sign up' : 'Sign in'}
-            </p>
+            <div className="MainContent">
+                {form ? <Register/> : <Login/>}
+                <p onClick={ChangeForm} className='Form__text__change'>
+                    {form ? 'Sign up' : 'Sign in'}
+                </p>
+            </div>
+            
         </div>
     </>
 }

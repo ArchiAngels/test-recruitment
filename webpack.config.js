@@ -5,7 +5,7 @@ module.exports = {
     mode:'development',
     output: {
         filename: 'bundled.reactApp.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'public/dist'),
         clean:true
     },
     module: {

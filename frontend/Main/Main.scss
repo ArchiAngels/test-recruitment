@@ -12,6 +12,12 @@ html{
 }
 .MainContainer{
     font-family: Montserrat-light;
+    width:100vw;
+    height:100vh;
+    background:#e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     & .Form__text__change{
         transition: 0.15s transform;
         user-select: none;

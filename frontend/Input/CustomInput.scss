@@ -1,0 +1,16 @@
+.CustomInput_container{
+    margin:1rem 0;
+    & .CustomInput_input{
+        border:1px solid transparent;
+        outline: none;
+        padding: 10px;
+        box-sizing: border-box;
+        &[placeholder]{
+            color:#000;
+            font-family: inherit;
+        }
+        &:focus{
+            border:1px solid #000;
+        }
+    }
+}
