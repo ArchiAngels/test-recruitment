@@ -1,0 +1,17 @@
+.Toasts__Container{
+    z-index: 2;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    & .Toast__Content{
+        position: absolute;
+        left:50px;
+        bottom:50px;
+        box-sizing: border-box;
+        padding: 15px;
+        
+    }
+
+}

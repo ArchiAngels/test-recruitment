@@ -4,9 +4,10 @@ import './notLogged.scss';
 import Login from '../login/Login.jsx';
 import Register from '../register/Register.jsx';
 import Send from '../Send/Send.jsx';
+// import Toast from "../Toast/Toast.jsx";
 import APIsend from '../../Scripts/SendToServer.js';
 
-function notLogged(){
+function notLogged(props){
 
     let [form,setForm] = useState(false);
     /*
@@ -17,12 +18,16 @@ function notLogged(){
         setForm(!form);
     }
 
-    function CheckForm(e){
+    async function CheckForm(e){
         let bool = CanWeSendInfo();
         let url = form ? '/auth/login' : '/auth/signup';
-        // console.log(e,bool);
+        console.log(elements,bool);
         if(bool){
-            APIsend(url,elements.elemsValue);
+            let result = await APIsend.SendMe(url,elements.elemsValue);
+            console.log('result::',result);
+            if(result.status == 'ok'){
+                props.loginIn(result.value.token);
+            }
         }
     }
     let form_state = form ? 'Sign up' : 'Sign in';
@@ -42,7 +47,7 @@ function notLogged(){
         elements['elems'][name] = value;
         elements['elemsValue'][name] = text;
         // console.log(elements);
-        console.log(CanWeSendInfo());
+        console.log('CanWeSendInfo::',CanWeSendInfo());
     }
     function CanWeSendInfo(){
         let result = true;
@@ -74,6 +79,7 @@ function notLogged(){
                 <p onClick={ChangeForm} className='Form__text__change'>
                     {form_state}
                 </p>
+                {/* <Toast/> */}
             </div>
         </div>
         

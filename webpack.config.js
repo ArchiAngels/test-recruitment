@@ -1,13 +1,15 @@
 const path = require('path');
+require("@babel/polyfill");
 
 module.exports = {
-    entry:'./frontend/reactApp.jsx',
+    entry:["@babel/polyfill",'./frontend/reactApp.jsx'],
     mode:'development',
     output: {
         filename: 'bundled.reactApp.js',
         path: path.resolve(__dirname, 'public/dist'),
         clean:true
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
           {
@@ -16,7 +18,17 @@ module.exports = {
             use: {
               loader: "babel-loader",
               options: {
-                presets: ["@babel/preset-react",'@babel/preset-env']
+                presets: ["@babel/preset-react",['@babel/preset-env',{useBuiltIns: 'entry',corejs: { version: "3.8", proposals: true }}]]
+              }
+            }
+          },
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader",
+              options: {
+                presets: [['@babel/preset-env',{useBuiltIns: 'entry',corejs: { version: "3.8", proposals: true }}]]
               }
             }
           },

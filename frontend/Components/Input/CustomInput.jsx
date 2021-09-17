@@ -9,9 +9,16 @@ function CustomInput(props){
         1 - NAME / SURNAME
         2 - PASSWORD
         3 - DATE OF BIRTH
+        4 - EMAIL
     */
 
-    props.setElements(props.name);
+    if(props.name){
+        props.setElements(props.name);
+    }
+    if(props.defaultValue){
+        props.updateElements(props.name,true,props.defaultValue);
+    }
+    
 
     function CheckInput(e){
         
@@ -19,6 +26,7 @@ function CustomInput(props){
             case 1: Verify.Name_Surname(e.target.value,SendInfoBack);break;
             case 2: Verify.Password(e.target.value,SendInfoBack);break;
             case 3: Verify.DateOfBirth(e.target.value,SendInfoBack);break;
+            case 4: Verify.Email(e.target.value,SendInfoBack);break;
         }
 
         function SendInfoBack(bool){
@@ -30,7 +38,7 @@ function CustomInput(props){
     return <div className="CustomInput_container">
         <label htmlFor={props.name}>{props.title}</label>
             <br/>
-        <input type={props.code == 3? 'date':"text"} placeholder={'Enter '+props.title} id={props.name} name={props.name} className='CustomInput_input' onChange={(e)=>{CheckInput(e)}}/>
+        <input type={props.code == 3? 'date':"text"} placeholder={'Enter '+props.title} id={props.name} name={props.name} className='CustomInput_input' onChange={(e)=>{CheckInput(e)}} defaultValue={props.defaultValue}/>
     </div>
 }
 

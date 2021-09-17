@@ -1,9 +1,10 @@
 import React from "react";
 import './Logged.scss';
 
-function Logged(){
+function Logged(props){
     return <>
         <p>Logged</p>
+        <h2 onClick = {props.logout}>OUT</h2>
     </>
 }
 

@@ -1,5 +1,5 @@
-function FindUser(data){
-    import { MongoClient } from "mongodb";
+function Login(data){
+  const MongoClient = require('mongodb').MongoClient;
 
     const url = "mongodb+srv://Admin:Admin@cluster0.szzdq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     
@@ -11,6 +11,23 @@ function FindUser(data){
     
         const database = client.db("USERS");
         const userlist = database.collection("UserList");
+
+        console.log("CHECK::",data);
+
+        let query = 
+        { 
+          Email : data.Email,
+          Password: data.Password                    
+        };
+        const user = await userlist.findOne(query);
+
+        console.log(user);
+
+        if(user){
+            return {status:'ok',why:'Succesfully find',data:user}
+        }else{
+            return {status:'bad',why:'not found'}
+        }
         
       }catch(error){
           console.dir(error.stack());
@@ -21,4 +38,4 @@ function FindUser(data){
     }
     return run().catch(console.dir);    
 }
-export default FindUser;
+module.exports = Login;

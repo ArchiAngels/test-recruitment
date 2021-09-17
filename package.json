@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "maybe":"webpack --config webpack.config.js && node index.js"
+    "maybe": "webpack --config webpack.config.js && node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

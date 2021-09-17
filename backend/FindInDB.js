@@ -1,5 +1,6 @@
-function CreateNewUser(data){
-  const MongoClient = require('mongodb').MongoClient;
+function FindInDB(data){
+    const MongoClient = require('mongodb').MongoClient;
+
 
     const url = "mongodb+srv://Admin:Admin@cluster0.szzdq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     
@@ -12,15 +13,19 @@ function CreateNewUser(data){
         const database = client.db("USERS");
         const userlist = database.collection("UserList");
 
-        const doc = {...data}
-    
-        const result = await userlist.insertOne(doc);
+        console.log("CHECK::",data);
 
-        if(result){
-          return {status:'ok',why:'succesfully register'}
+        let query = { Email : data.Email };
+        const user = await userlist.findOne(query);
+
+        console.log(user);
+
+        if(user){
+            return {status:'bad',why:'email already registered'}
         }else{
-          return {status:'bad',why:'something is gonna wrong'}
+            return {status:'ok',why:'email is free to register'}
         }
+
         
       }catch(error){
           console.dir(error.stack());
@@ -31,4 +36,4 @@ function CreateNewUser(data){
     }
     return run().catch(console.dir);    
 }
-module.exports = CreateNewUser;
+module.exports = FindInDB;

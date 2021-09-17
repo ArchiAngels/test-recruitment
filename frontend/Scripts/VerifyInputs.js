@@ -44,4 +44,19 @@ module.exports.DateOfBirth = function(value,callback){
         
 }
 
+module.exports.Email = function(value,callback){
+    value = value.trim();
 
+    if(value.length > 3){
+        let regex = /^([\w-\d\-\.])+@([\w-\d\-])+(\.\w+)$/gi
+        let result = value.match(regex);
+        if(result){
+            console.warn('Email ok::',value,result);
+            callback(true);
+        }else{
+            callback(false);
+        }
+    }else{
+        callback(false);
+    }
+}
