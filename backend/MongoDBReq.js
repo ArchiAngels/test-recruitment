@@ -17,7 +17,7 @@ function CreateNewUser(data){
         const result = await userlist.insertOne(doc);
 
         if(result){
-          return {status:'ok',why:'succesfully register'}
+          return {status:'ok',why:'succesfully register',Email:data.Email}
         }else{
           return {status:'bad',why:'something is gonna wrong'}
         }

@@ -1,4 +1,4 @@
-function FindInDB(data){
+function FindInDB(data,dataUser = false){
     const MongoClient = require('mongodb').MongoClient;
 
 
@@ -13,15 +13,15 @@ function FindInDB(data){
         const database = client.db("USERS");
         const userlist = database.collection("UserList");
 
-        console.log("CHECK::",data);
-
         let query = { Email : data.Email };
         const user = await userlist.findOne(query);
 
-        console.log(user);
-
         if(user){
-            return {status:'bad',why:'email already registered'}
+            if(dataUser == true){
+              return {status:'ok',why:'find succesfully',user:user}
+            }else{
+              return {status:'bad',why:'email already registered'}
+            }
         }else{
             return {status:'ok',why:'email is free to register'}
         }

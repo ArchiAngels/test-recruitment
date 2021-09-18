@@ -7,17 +7,13 @@ const LoginUser = require('./MongoDBLOGIN.js');
 const JWT = require('./JWT.js');
 
 Router.get('/',function(req,res){
-    console.log(req.url);
     res.sendFile(path.join(__dirname,'../','index.html'));
 })
 
 Router.post('/auth/login', function(req,res){
-    console.log('REQ::',req.url);
     req.on('data',async function(chunk){
         let J = JSON.parse(chunk+'');
-        console.log(J);
         let R = await LoginUser(J);
-        console.log(R)
         if(R.status == 'ok'){
             res.json({...R,token:JWT.CODE(R)});
         }else{
@@ -26,12 +22,9 @@ Router.post('/auth/login', function(req,res){
     })
 })
 Router.post('/auth/signup', function(req,res){
-    console.log('REQ::',req.url);
     req.on('data',async function(chunk){
         let J = JSON.parse(chunk+'');
-        console.log(J);
         let R = await FindInDB(J);
-        console.log(R);
         if(R.status == 'ok'){
             let result = await CreateUser(J);
             res.json({...result,token:JWT.CODE(result)});
@@ -42,13 +35,12 @@ Router.post('/auth/signup', function(req,res){
     
 })
 Router.post('/auth/token',function(req,res){
-    console.log(req.url);
-    req.on('data',function(chunk){
+    req.on('data',async function(chunk){
         let J = JSON.parse(chunk+'');
-        console.log(J);
-        let R = JWT.DECODE(J);
+        let R = JWT.DECODE(J,true);
         if(R.status == 'ok'){
-            res.json(R);
+            let result = await FindInDB(R.data.data,true);
+            res.json(result);
         }else{
             res.json(R)
         }

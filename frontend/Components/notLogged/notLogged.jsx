@@ -4,8 +4,9 @@ import './notLogged.scss';
 import Login from '../login/Login.jsx';
 import Register from '../register/Register.jsx';
 import Send from '../Send/Send.jsx';
-// import Toast from "../Toast/Toast.jsx";
 import APIsend from '../../Scripts/SendToServer.js';
+import SpecialBTN from "../SpecialBTN/SpecialBTN.jsx";
+
 
 function notLogged(props){
 
@@ -21,10 +22,8 @@ function notLogged(props){
     async function CheckForm(e){
         let bool = CanWeSendInfo();
         let url = form ? '/auth/login' : '/auth/signup';
-        console.log(elements,bool);
         if(bool){
             let result = await APIsend.SendMe(url,elements.elemsValue);
-            console.log('result::',result);
             if(result.status == 'ok'){
                 props.loginIn(result.value.token);
             }
@@ -41,13 +40,10 @@ function notLogged(props){
     function setElements(name){
         elements['elems'][name] = false;
         elements.counter ++;
-        // console.log(elements);
     }
     function updateElements(name,value,text){
         elements['elems'][name] = value;
         elements['elemsValue'][name] = text;
-        // console.log(elements);
-        console.log('CanWeSendInfo::',CanWeSendInfo());
     }
     function CanWeSendInfo(){
         let result = true;
@@ -76,10 +72,7 @@ function notLogged(props){
                 <Send title={form_state2}/>            
             </form>
                 
-                <p onClick={ChangeForm} className='Form__text__change'>
-                    {form_state}
-                </p>
-                {/* <Toast/> */}
+                <SpecialBTN function={ChangeForm} title={form_state}/>
             </div>
         </div>
         

@@ -1,0 +1,20 @@
+.WrapUser{
+    padding: 20px;
+    & .infoWrap{
+        padding:15px 0;
+        & .info__key{
+            display: table;
+        }
+        & .info__value{
+            margin:0 0 0 10px;
+            display: inline-block;
+        }
+        & .info__styled_wrap{
+            border-radius: 20px;
+            border:1px solid #fff;
+            display: inline-block;
+            background: lavender;
+            padding: 15px;
+        }
+    }
+}

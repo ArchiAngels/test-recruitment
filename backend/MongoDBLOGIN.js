@@ -12,19 +12,15 @@ function Login(data){
         const database = client.db("USERS");
         const userlist = database.collection("UserList");
 
-        console.log("CHECK::",data);
-
-        let query = 
-        { 
+        let query = { 
           Email : data.Email,
           Password: data.Password                    
         };
+
         const user = await userlist.findOne(query);
 
-        console.log(user);
-
         if(user){
-            return {status:'ok',why:'Succesfully find',data:user}
+            return {status:'ok',why:'Succesfully find',Email:user.Email}
         }else{
             return {status:'bad',why:'not found'}
         }

@@ -7,9 +7,7 @@ module.exports.SendMe = function(url,body){
         let b = JSON.stringify(body);
         xhr.open('POST',url);
         xhr.send(b);
-        console.log('BODY::',body,b);
         xhr.onload = function(){
-            console.log('RES::',xhr.response);
             clearTimeout(t);
             res({value:JSON.parse(xhr.response),status:JSON.parse(xhr.response).status});
         };

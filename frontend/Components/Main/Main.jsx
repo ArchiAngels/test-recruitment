@@ -5,34 +5,42 @@ import Logged from '../logged/Logged.jsx';
 import APIsend from '../../Scripts/SendToServer.js';
 
 function Main(){
-    let [logged,setLogged] = useState(false);
+    let [logged,setLogged] = useState({info:null,status:false});
 
     useEffect(async ()=>{
-        if(logged){
+        if(logged.status){
             console.log('Already logged');
         }else{
             let l = localStorage;
-            console.log("L::",l)
             let item = l.getItem('token');
             if(item != null){
                 let result = await APIsend.SendMe('/auth/token',item);
-                console.log('MAIN::',result);
-                setLogged(result.status);
+                if(result.status == 'ok'){
+                    setLogged({...logged,status:true,info:result.value.user});
+                }else{
+                    console.log('BAD TOKEN');
+                }
+                
             }
         }
     })
 
     function logOut(){
         localStorage.clear();
-        setLogged(false);
+        setLogged({...logged,status:false});
     }
     function LogIn(token){
         localStorage.setItem('token',token);
-        setLogged(true);
+        setLogged({...logged,status:false});
     }
 
     return <>
-        {logged ? <Logged logout={logOut}/> : <NotLogged loginIn={LogIn}/> }
+        
+        <div className="main__container">
+            <p className='Status__account'>{logged.status ? 'Logged': 'Not Logged' }</p>
+            {logged.status ? <Logged logout={logOut} user={logged.info}/> : <NotLogged loginIn={LogIn}/> }
+        </div>
+        
     </>
 }
 

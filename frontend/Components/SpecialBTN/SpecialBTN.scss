@@ -1,0 +1,18 @@
+.Form__text__change{
+    position:absolute;
+    font-family: Montserrat-light;
+    top:0;
+    left:0;
+    transition: 0.15s transform;
+    user-select: none;
+    background: #000;
+    display: inline-block;
+    color:#fff;
+    &:hover{
+        cursor: pointer;
+        
+    }
+    &:active{
+        transform: translateY(10px);
+    }
+}
