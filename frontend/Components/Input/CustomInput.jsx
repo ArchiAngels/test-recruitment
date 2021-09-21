@@ -67,7 +67,17 @@ function CustomInput(props){
     return <div className="CustomInput_container">
         <label htmlFor={props.name}>{props.title}</label>
             <br/>
-        <input type={props.code == 3? 'text':"text"} placeholder={'Enter '+props.title} id={props.name} name={props.name} className='CustomInput_input' onChange={(e)=>{CheckInput(e)}} defaultValue={props.defaultValue}/>
+        <input 
+        type={props.code == 3? 'text':"text"} 
+        placeholder={'Enter '+props.title} 
+        id={props.name} 
+        name={props.name} 
+        className='CustomInput_input' 
+        onChange={(e)=>{CheckInput(e)}} 
+        defaultValue={props.defaultValue}
+        maxLength = {props.code == 3? 10:128} 
+        
+        />
         <p className='CustomInput_help'>{WhatWECanEnter(props.code)}</p>
     </div>
 }

@@ -34,12 +34,11 @@ module.exports.DateOfBirth = function(value,callback,el){
     */
 
     window.addEventListener('keydown',(e)=>{ChangeDirectionAndRunIt(e)});
-    window.addEventListener('keypress',(e)=>{ChangeDirectionAndRunIt(e)});
-    window.addEventListener('keyup',(e)=>{ChangeDirectionAndRunIt(e)});
+    // window.addEventListener('keypress',(e)=>{ChangeDirectionAndRunIt(e)});
+    // window.addEventListener('keyup',(e)=>{ChangeDirectionAndRunIt(e)});
     function ChangeDirectionAndRunIt(event){
         if(event.key == 'Backspace'){
             direction_right = false;
-
         }else{
             direction_right = true;
         }
@@ -48,7 +47,7 @@ module.exports.DateOfBirth = function(value,callback,el){
     
     function DeleteAndPast(){
         if(direction_right == true){
-            if(value.length  == 2 || value.length == 5){
+            if(value.length == 2 || value.length == 5){
                 el.target.value+= '-';
             }
         }
@@ -58,11 +57,16 @@ module.exports.DateOfBirth = function(value,callback,el){
     value = value.trim();
     DeleteAndPast();
     
-    let regex = /[0-9]+/gi;
+    let regex = /(\d){2}/gi;
     let result = value.match(regex);
     let counter = 3;
+    
+    
     if(result){
-
+        if(result[2] && result[3]){
+            result[2] += result[3];
+            result.pop();
+        }
         result.map((e,i)=>{
             e = parseInt(e);
             if(i == 0){
