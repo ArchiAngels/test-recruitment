@@ -5,6 +5,7 @@ module.exports.SendMe = function(url,body){
         },5000);
         let xhr = new XMLHttpRequest;
         let b = JSON.stringify(body);
+        console.log(body,b);
         xhr.open('POST',url);
         xhr.send(b);
         xhr.onload = function(){

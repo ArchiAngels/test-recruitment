@@ -75,7 +75,7 @@ function CustomInput(props){
         className='CustomInput_input' 
         onChange={(e)=>{CheckInput(e)}} 
         defaultValue={props.defaultValue}
-        maxLength = {props.code == 3? 10:128} 
+        maxLength = {props.code == 3? 14:32} 
         
         />
         <p className='CustomInput_help'>{WhatWECanEnter(props.code)}</p>

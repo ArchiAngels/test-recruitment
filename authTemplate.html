@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <title>auth</title>
+</head>
+<body>
+    <script >
+        // -----------------------------------------------
+        const API_SEND = function(url,body){
+            return new Promise(async function(res,rej){
+                let t = setTimeout(()=>{
+                    rej({mess:'Time up',status:'bad'})
+                },5000);
+                let xhr = new XMLHttpRequest;
+                let b = JSON.stringify(body);
+                console.log(body,b);
+                xhr.open('POST',url);
+                xhr.send(b);
+                xhr.onload = function(){
+                    clearTimeout(t);
+                    res({value:JSON.parse(xhr.response),status:JSON.parse(xhr.response).status});
+                };
+            }).then(
+                function(value){
+                    return value;
+                },
+                function(err){
+                    return err;
+                }
+            )    
+        };
+        // -----------------------------------------------
+        
+        async function send(){
+            let l = localStorage;
+            let DATAtoSEND = JSON.parse(l.getItem('DataToServer'));
+
+            let url = DATAtoSEND.url;
+                delete DATAtoSEND.url;
+
+            let result = await API_SEND(url,DATAtoSEND);
+            
+            l.clear();
+
+            if(result.status == 'ok'){                
+                l.setItem('token',result.value.token);                
+            }
+            window.location.href = window.location.origin;
+        }
+
+        send();
+        
+
+    </script>
+    <noscript>Script is not running on your browser</noscript>
+</body>
+</html>

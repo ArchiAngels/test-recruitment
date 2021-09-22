@@ -10,6 +10,10 @@ Router.get('/',function(req,res){
     res.sendFile(path.join(__dirname,'../','index.html'));
 })
 
+Router.get('/auth',function(req,res){
+    res.sendFile(path.join(__dirname,'../','authTemplate.html'));
+})
+
 Router.post('/auth/login', function(req,res){
     req.on('data',async function(chunk){
         let J = JSON.parse(chunk+'');

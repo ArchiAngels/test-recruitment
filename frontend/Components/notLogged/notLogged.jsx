@@ -4,7 +4,6 @@ import './notLogged.scss';
 import Login from '../login/Login.jsx';
 import Register from '../register/Register.jsx';
 import Send from '../Send/Send.jsx';
-import APIsend from '../../Scripts/SendToServer.js';
 import SpecialBTN from "../SpecialBTN/SpecialBTN.jsx";
 
 
@@ -21,12 +20,18 @@ function notLogged(props){
 
     async function CheckForm(e){
         let bool = CanWeSendInfo();
-        let url = form ? '/auth/login' : '/auth/signup';
         if(bool){
-            let result = await APIsend.SendMe(url,elements.elemsValue);
-            if(result.status == 'ok'){
-                props.loginIn(result.value.token);
-            }
+            let obj = {...elements.elemsValue,url: form == true? '/auth/login':'/auth/signup'}
+            console.log(obj);
+            localStorage.setItem('DataToServer',JSON.stringify(obj));
+            console.log(localStorage,'\n',window.location.origin);
+
+            // IT WORKS!!
+            window.location.href = window.location.origin +'/auth';
+
+            /*
+                SAVE IN LOCAL STORAGE and then send to the server after verif
+            */
         }
     }
     let form_state = form ? 'Sign up' : 'Sign in';
